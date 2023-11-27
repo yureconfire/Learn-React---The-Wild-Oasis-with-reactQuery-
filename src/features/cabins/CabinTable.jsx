@@ -5,6 +5,7 @@ import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
+import Empty from "../../ui/Empty";
 
 function CabinTable() {
   const { isLoading, cabins } = useCabins();
@@ -19,6 +20,7 @@ function CabinTable() {
   if (filterValue === "with-discount")
     filteredCabins = cabins?.filter((cabin) => cabin.discount > 0);
   if (isLoading) return <Spinner />;
+  if (!cabins.length) return <Empty resourceName="cabins" />;
 
   //2)SORT
   const sortBy = searchParams.get("sortBy") || "startDate-asc";
